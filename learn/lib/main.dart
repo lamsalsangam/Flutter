@@ -87,14 +87,31 @@ class Home extends StatelessWidget {
       //   //   ),
       //   //    color: Colors.blueGrey,
       //   // ),
-      body: Container(
-        // padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-        // padding: EdgeInsets.all(20.0),
-        padding: EdgeInsets.fromLTRB(10.0, 20.0, 30.0, 40.0),
-        // It is the same as the padding in the margin one
-        margin: EdgeInsets.all(30.0),
-        color: Colors.grey.shade400,
-        child: Text('Hello World'),
+      // body: Container(
+      //   // padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+      //   // padding: EdgeInsets.all(20.0),
+      //   padding: EdgeInsets.fromLTRB(10.0, 20.0, 30.0, 40.0),
+      //   // It is the same as the padding in the margin one
+      //   margin: EdgeInsets.all(30.0),
+      //   color: Colors.grey.shade400,
+      //   child: Text('Hello World'),
+      // ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Hello, World'),
+          TextButton(onPressed: (){},
+            child: Text('Click Me'),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.amber,
+            ),),
+          Container(
+            color: Colors.cyan,
+            padding: EdgeInsets.all(30.0),
+            child: Text('Inside Container'),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: startHammering,
