@@ -96,21 +96,44 @@ class Home extends StatelessWidget {
       //   color: Colors.grey.shade400,
       //   child: Text('Hello World'),
       // ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      // For the Row
+      // body: Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: [
+      //     Text('Hello, World'),
+      //     TextButton(onPressed: (){},
+      //       child: Text('Click Me'),
+      //       style: TextButton.styleFrom(
+      //         backgroundColor: Colors.amber,
+      //       ),),
+      //     Container(
+      //       color: Colors.cyan,
+      //       padding: EdgeInsets.all(30.0),
+      //       child: Text('Inside Container'),
+      //     )
+      //   ],
+      // ),
+      // For the Column
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text('Hello, World'),
-          TextButton(onPressed: (){},
-            child: Text('Click Me'),
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.amber,
-            ),),
           Container(
+            padding: EdgeInsets.all(20.0),
             color: Colors.cyan,
+            child: Text('One'),
+          ),
+          Container(
             padding: EdgeInsets.all(30.0),
-            child: Text('Inside Container'),
-          )
+            color: Colors.pinkAccent,
+            child: Text('Two'),
+          ),
+          Container(
+            padding: EdgeInsets.all(40.0),
+            color: Colors.amber,
+            child: Text('Three'),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
