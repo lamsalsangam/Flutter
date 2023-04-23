@@ -4,10 +4,17 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  int userLevel = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +25,15 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.grey[850],
           elevation: 0.0,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            setState(() {
+              userLevel += 1;
+            });
+          },
+          backgroundColor: Colors.grey[800],
+          child: const Icon(Icons.add),
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -61,7 +77,7 @@ class MyApp extends StatelessWidget {
               ),
               const SizedBox(height: 10.0,),
               Text(
-                '8',
+                '$userLevel',
                 style: TextStyle(
                   color: Colors.amberAccent[200],
                   letterSpacing: 2.0,
@@ -94,4 +110,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
