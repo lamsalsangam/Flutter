@@ -24,7 +24,14 @@ class _QuoteListState extends State<QuoteList>{
   ];
 
   Widget quoteTemplate(quote){
-    return QuoteCard(quote: quote);
+    return QuoteCard(
+      quote: quote,
+      delete: (){
+        setState(() {
+          quotes.remove(quote);
+        });
+      }
+    );
   }
 
   @override
