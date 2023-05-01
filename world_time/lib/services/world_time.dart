@@ -12,6 +12,8 @@ class WorldTime {
   String flag;
   // location url for the api end point
   String url;
+  // true or false if daytime or not
+  bool isDayTime = false;
 
   WorldTime({required this.location,required this.flag, required this.url});
 
@@ -23,6 +25,7 @@ class WorldTime {
       // Set the time property
       DateTime now = DateTime.parse(data["dateTime"]);
 
+      isDayTime= now.hour> 6 && now.hour< 20 ? true : false;
       time = DateFormat.jm().format(now);
     }catch(e){
       if (kDebugMode) {
