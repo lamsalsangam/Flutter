@@ -1,3 +1,4 @@
+import 'package:catalog_app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget{
@@ -13,7 +14,7 @@ class MyHomePage extends StatelessWidget{
         backgroundColor: Colors.indigo[900],
       ),
       drawer: const SafeArea(
-        child: Drawer(),
+        child: MyDrawer(),
       ),
       body: Center(
         child: Column(
