@@ -9,9 +9,16 @@ class MyHomePage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.indigo[900],
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       drawer: const SafeArea(
         child: MyDrawer(),
