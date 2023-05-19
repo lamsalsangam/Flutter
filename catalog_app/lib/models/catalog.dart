@@ -1,5 +1,5 @@
 class Item {
-  final String id;
+  final int id;
   final String name;
   final String desc;
   final num price;
@@ -8,10 +8,11 @@ class Item {
 
   Item({required this.id, required this.name, required this.desc, required this.price, required this.color, required this.image});
 }
+class CatalogModel {
 
-final products = [
+static final items = [
   Item(
-      id: "SangamStore001",
+      id: 1,
       name: "iPhone 14 Pro",
       desc: "Apple iPhone 14th generation",
       price: 1499,
@@ -19,3 +20,4 @@ final products = [
       image:
       "https://www.apple.com/v/iphone-14-pro/h/images/key-features/features/dynamic-island/dd_dynamic_island_bubbles__eta5uuag8ay6_medium.jpg")
 ];
+}
