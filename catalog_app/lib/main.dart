@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget{
       // debugShowCheckedModeBanner: false,
       initialRoute: MyRoutes.homeRoute,
       routes: {
-        MyRoutes.homeRoute:(context)=>const MyHomePage(title: "Sangam Store"),
+        MyRoutes.homeRoute:(context)=>HomePage(),
         MyRoutes.loginRoute:(context)=>LoginPage(),
       },
     );
