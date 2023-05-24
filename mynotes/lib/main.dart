@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mynotes/views/login_view.dart';
 import 'package:mynotes/views/register_view.dart';
 
 
@@ -12,7 +13,7 @@ Future<void> main() async {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     ),
-    home: const RegisterView(),
+    home: const LoginView(),
   ));
 }
 
