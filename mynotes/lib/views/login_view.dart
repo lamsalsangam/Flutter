@@ -83,6 +83,10 @@ class _LoginViewState extends State<LoginView> {
                           if (kDebugMode) {
                             print("user not found");
                           }
+                        }else if (e.code == "wrong-password"){
+                          if (kDebugMode) {
+                            print("Wrong Password");
+                          }
                         }
                       }
                       // catch (error){
