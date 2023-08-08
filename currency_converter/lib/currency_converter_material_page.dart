@@ -22,7 +22,7 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Currency Converter",
+              "Yen(円) TO NPR(रू)",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w400,
@@ -37,11 +37,31 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30.0,),
-            TextField(
-              decoration: InputDecoration(
-                suffixIcon: Icon(Icons.attach_money_outlined),
-                suffixIconColor: Colors.amber,
-                hintText: "Please Enter the amount in USD"
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              child: TextField(
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide(style: BorderStyle.none)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                      color: Colors.black54,
+                      strokeAlign: BorderSide.strokeAlignInside,
+                    ),
+                  ),
+                  suffixIcon: Icon(Icons.currency_yen_sharp),
+                  suffixIconColor: Colors.amber,
+                  hintText: "Please Enter the amount in USD",
+                  filled: true,
+                  fillColor: Colors.black12,
+                  contentPadding: EdgeInsets.all(25.0),
+                ),
               ),
             )
           ],
