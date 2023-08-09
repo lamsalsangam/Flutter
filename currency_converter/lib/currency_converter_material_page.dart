@@ -16,28 +16,28 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.white,
       ),
-      body: const Center(
+      body:Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Yen(円) TO NPR(रू)",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 30.0,),
-            Text(
+            const SizedBox(height: 30.0,),
+            const Text(
               "0.0",
               style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w400
               ),
             ),
-            SizedBox(height: 30.0,),
-            Padding(
+            const SizedBox(height: 30.0,),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: TextField(
                 keyboardType: TextInputType.numberWithOptions(
@@ -62,6 +62,23 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
                   fillColor: Colors.black12,
                   contentPadding: EdgeInsets.all(25.0),
                 ),
+              ),
+            ),
+            const SizedBox(height: 20.0,),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextButton(onPressed: (){
+                debugPrint("Button Pressed");
+              },
+              style: TextButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: Colors.blueGrey,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)
+                )
+              ),
+                child: const Text("Convert"),
               ),
             )
           ],
