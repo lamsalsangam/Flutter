@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/filter_bar.dart';
+
+import '../components/header.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -6,8 +9,13 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text("Home Shop"),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Header(),
+            FilterBar()
+          ],
+        ),
       ),
     );
   }
