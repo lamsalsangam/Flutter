@@ -32,15 +32,16 @@ class DownContainer extends StatelessWidget {
               height: 10,
             ),
             OptionalSizes(product: product),
-            const Spacer(flex: 1,),
+            const Spacer(
+              flex: 1,
+            ),
             ElevatedButton(
               onPressed: () {
                 // Implement your logic for the button's onPressed event.
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                minimumSize: const Size(double.infinity, 50)
-              ),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  minimumSize: const Size(double.infinity, 50)),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -84,6 +85,7 @@ class _OptionalSizesState extends State<OptionalSizes> {
   @override
   void initState() {
     super.initState();
+    // The "as" keyword is used to cast the value to a List<int>?, indicating that the value might be a list of integers or null.
     selectedSize = (widget.product['sizes'] as List<int>?)?.first.toString() ??
         ''; // Initialize selectedSize with the first size
   }
