@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/filter_bar.dart';
+import 'package:shop_app/components/product_section.dart';
 
 import '../components/header.dart';
 
@@ -14,6 +15,7 @@ class MyHomePage extends StatelessWidget {
           children: [
             Header(),
             FilterBar(),
+            ProductSection(),
           ],
         ),
       ),
