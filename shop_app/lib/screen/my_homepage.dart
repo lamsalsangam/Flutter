@@ -13,7 +13,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             Header(),
-            FilterBar()
+            FilterBar(),
           ],
         ),
       ),
