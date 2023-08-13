@@ -16,12 +16,9 @@ class Header extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  const Text(
+                  Text(
                     "Home",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 30,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Row(
                     children: [
@@ -53,16 +50,15 @@ class Header extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5),
                     bottomLeft: Radius.circular(60)),
-                borderSide:
-                BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
+                borderSide: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
               ),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5),
                     bottomLeft: Radius.circular(60),
                   ),
-                  borderSide: BorderSide(color: Color.fromRGBO(70, 50, 255, 0.5))
-              ),
+                  borderSide:
+                      BorderSide(color: Color.fromRGBO(70, 50, 255, 0.5))),
               prefixIcon: Icon(Icons.search),
               hintText: "Search",
             ),
