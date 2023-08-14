@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/Provider/cart_provider.dart';
 
-class DownContainer extends StatelessWidget {
+class DownContainer extends StatefulWidget {
   const DownContainer({
     super.key,
     required this.product,
@@ -9,39 +11,84 @@ class DownContainer extends StatelessWidget {
   final Map<String, Object> product;
 
   @override
+  State<DownContainer> createState() => _DownContainerState();
+}
+
+class _DownContainerState extends State<DownContainer> {
+  late int selectedSize;
+  bool isSizeSelected = false; // Set initial state to false
+
+  void onTap() {
+    if (widget.product.containsKey('sizes') && !isSizeSelected) {
+      // Show SnackBar when sizes are present but not selected
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a size.'),
+        ),
+      );
+      return; // Return to prevent adding to the cart
+    }
+
+    Provider.of<CartProvider>(context, listen: false).addProduct({
+      'id': widget.product['id'],
+      'title': widget.product['title'],
+      'price': widget.product['price'],
+      'imageUrl': widget.product['imageUrl'],
+      'category': widget.product['category'],
+      if (widget.product.containsKey('sizes')) 'size': selectedSize,
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final sizesList = widget.product['sizes'] as List<int>?;
+    selectedSize = 0; // Set selectedSize to 0 initially
+    isSizeSelected = sizesList?.isNotEmpty != true; // Update the variable
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 250,
       width: double.infinity,
       decoration: const BoxDecoration(
-          color: Color.fromRGBO(108, 123, 149, 1),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+        color: Color.fromRGBO(108, 123, 149, 1),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50.0),
+          topRight: Radius.circular(50.0),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           children: [
             Text(
-              "रू ${product['price']}",
+              "रू ${widget.product['price']}",
               style: const TextStyle(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 35),
+                color: Colors.white70,
+                fontWeight: FontWeight.w600,
+                fontSize: 35,
+              ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            OptionalSizes(product: product),
-            const Spacer(
-              flex: 1,
-            ),
+            const SizedBox(height: 10),
+            if (widget.product.containsKey('sizes'))
+              OptionalSizes(
+                sizesList: widget.product['sizes'] as List<int>,
+                selectedSize: selectedSize,
+                onSizeSelected: (size) {
+                  setState(() {
+                    selectedSize = size;
+                  });
+                },
+              ),
+            const Spacer(flex: 1),
             ElevatedButton(
-              onPressed: () {
-                // Implement your logic for the button's onPressed event.
-              },
+              onPressed: onTap,
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  minimumSize: const Size(double.infinity, 50)),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                minimumSize: const Size(double.infinity, 50),
+              ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -49,7 +96,7 @@ class DownContainer extends StatelessWidget {
                     Icons.shopping_cart,
                     color: Colors.white70,
                   ),
-                  SizedBox(width: 8), // Add some spacing between icon and text
+                  SizedBox(width: 8),
                   Text(
                     "Add to Cart",
                     style: TextStyle(
@@ -67,80 +114,57 @@ class DownContainer extends StatelessWidget {
   }
 }
 
-class OptionalSizes extends StatefulWidget {
+class OptionalSizes extends StatelessWidget {
   const OptionalSizes({
     super.key,
-    required this.product,
+    required this.sizesList,
+    required this.selectedSize,
+    required this.onSizeSelected,
   });
 
-  final Map<String, Object> product;
-
-  @override
-  State<OptionalSizes> createState() => _OptionalSizesState();
-}
-
-class _OptionalSizesState extends State<OptionalSizes> {
-  late String selectedSize;
-
-  @override
-  void initState() {
-    super.initState();
-    // The "as" keyword is used to cast the value to a List<int>?, indicating that the value might be a list of integers or null.
-    selectedSize = (widget.product['sizes'] as List<int>?)?.first.toString() ??
-        ''; // Initialize selectedSize with the first size
-  }
+  final List<int> sizesList;
+  final int selectedSize;
+  final void Function(int) onSizeSelected;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget.product.containsKey('sizes') &&
-          (widget.product['sizes'] as List<int>?)?.isNotEmpty == true,
+      visible: sizesList.isNotEmpty,
       child: SizedBox(
         height: 50,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: (widget.product["sizes"] as List<int>?)?.length ?? 0,
+          itemCount: sizesList.length,
           itemBuilder: (context, index) {
-            final sizesList = widget.product["sizes"] as List<int>?;
-            if (sizesList != null && index < sizesList.length) {
-              final size = sizesList[index];
-
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedSize = size.toString();
-                    });
-                  },
-                  child: Chip(
-                    label: Text(
-                      size.toString(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: selectedSize == size.toString()
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : const Color.fromRGBO(0, 0, 0, 1), // Text color
-                      ),
-                    ),
-                    backgroundColor: selectedSize == size.toString()
-                        ? const Color.fromRGBO(10, 77, 104, 1)
-                        : const Color.fromRGBO(245, 247, 249, 1),
-                    // Chip background color
-                    elevation: 2,
-                    shadowColor: Colors.grey,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+            final size = sizesList[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () {
+                  onSizeSelected(size);
+                },
+                child: Chip(
+                  label: Text(
+                    size.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: selectedSize == size
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : const Color.fromRGBO(0, 0, 0, 1),
                     ),
                   ),
+                  backgroundColor: selectedSize == size
+                      ? const Color.fromRGBO(10, 77, 104, 1)
+                      : const Color.fromRGBO(245, 247, 249, 1),
+                  elevation: 2,
+                  shadowColor: Colors.grey,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
-              );
-            } else {
-              return const SizedBox(
-                width: 10,
-              );
-            }
+              ),
+            );
           },
         ),
       ),

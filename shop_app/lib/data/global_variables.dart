@@ -60,6 +60,6 @@ final cart = [
     'price': 3999.99,
     'imageUrl': 'assets/images/male_shoe.png',
     'category': 'shoe',
-    'sizes': [7, 8, 9, 10],
+    'size': 7,
   },
 ];

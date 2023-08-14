@@ -6,3 +6,4 @@ Trying out the concept to learn more about the flutter development.
 
 - [Flutter](https://flutter.dev/)
 - [Google Font](https://fonts.google.com/specimen/Barlow+Condensed)
+- [Provider](https://pub.dev/packages/provider)
