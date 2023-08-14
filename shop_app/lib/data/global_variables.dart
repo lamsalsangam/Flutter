@@ -46,20 +46,20 @@ final products = [
   },
 ];
 
-final cart = [
-  {
-    'id': '0',
-    'title': 'Lenovo Laptop',
-    'price': 219999.99,
-    'imageUrl': 'assets/images/lenovo_laptop.png',
-    'category': 'laptop',
-  },
-  {
-    'id': '4',
-    'title': 'Rugged Shoe',
-    'price': 3999.99,
-    'imageUrl': 'assets/images/male_shoe.png',
-    'category': 'shoe',
-    'size': 7,
-  },
-];
+// final cart = [
+//   {
+//     'id': '0',
+//     'title': 'Lenovo Laptop',
+//     'price': 219999.99,
+//     'imageUrl': 'assets/images/lenovo_laptop.png',
+//     'category': 'laptop',
+//   },
+//   {
+//     'id': '4',
+//     'title': 'Rugged Shoe',
+//     'price': 3999.99,
+//     'imageUrl': 'assets/images/male_shoe.png',
+//     'category': 'shoe',
+//     'size': 7,
+//   },
+// ];

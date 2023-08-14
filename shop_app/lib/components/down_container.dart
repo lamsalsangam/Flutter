@@ -16,17 +16,16 @@ class DownContainer extends StatefulWidget {
 
 class _DownContainerState extends State<DownContainer> {
   late int selectedSize;
-  bool isSizeSelected = false; // Set initial state to false
+  bool isSizeSelected = false;
 
   void onTap() {
     if (widget.product.containsKey('sizes') && !isSizeSelected) {
-      // Show SnackBar when sizes are present but not selected
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please select a size.'),
         ),
       );
-      return; // Return to prevent adding to the cart
+      return;
     }
 
     Provider.of<CartProvider>(context, listen: false).addProduct({
@@ -37,14 +36,19 @@ class _DownContainerState extends State<DownContainer> {
       'category': widget.product['category'],
       if (widget.product.containsKey('sizes')) 'size': selectedSize,
     });
+
+    // Add the closing parenthesis
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Product added successfully.'),
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    final sizesList = widget.product['sizes'] as List<int>?;
-    selectedSize = 0; // Set selectedSize to 0 initially
-    isSizeSelected = sizesList?.isNotEmpty != true; // Update the variable
+    selectedSize = 0;
   }
 
   @override
@@ -79,6 +83,7 @@ class _DownContainerState extends State<DownContainer> {
                 onSizeSelected: (size) {
                   setState(() {
                     selectedSize = size;
+                    isSizeSelected = true; // Mark size as selected
                   });
                 },
               ),
