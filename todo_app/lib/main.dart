@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/provider/task_data.dart';
 import 'package:todo_app/screen/home_page.dart';
 
 void main() {
@@ -8,15 +10,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.dark(
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => TaskData(),
+      child: MaterialApp(
+        title: 'To-Do App',
+        theme: ThemeData.dark(useMaterial3: true),
+        home: const MyHomePage(title: 'To-Do List'),
       ),
-      home: const MyHomePage(title: 'To-Do List'),
     );
   }
 }

@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 
-class TaskTile extends StatefulWidget {
-  TaskTile({super.key, required this.isCompleted});
+class TaskTile extends StatelessWidget {
+  const TaskTile({
+    super.key,
+    required this.isCompleted,
+    required this.taskTitle,
+    required this.onChanged,
+    required this.onDelete,
+  });
 
-  late bool isCompleted;
+  final bool isCompleted;
+  final String taskTitle;
+  final ValueChanged<bool?> onChanged;
+  final VoidCallback onDelete;
 
-  @override
-  State<TaskTile> createState() => _TaskTileState();
-}
-
-class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text("Complete this project"),
-      trailing: Checkbox(
-        value: widget.isCompleted,
-        onChanged: (value) {
-          setState(() {
-            widget.isCompleted = value!;
-          });
-        },
+      title: Text(
+        taskTitle,
+        style: TextStyle(
+          decoration: isCompleted ? TextDecoration.lineThrough : null,
+        ),
       ),
+      trailing: Checkbox(
+        value: isCompleted,
+        onChanged: onChanged,
+      ),
+      onLongPress: onDelete,
     );
   }
 }

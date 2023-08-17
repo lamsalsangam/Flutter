@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/components/task-input.dart';
-import 'package:todo_app/components/task-list.dart';
+import '../components/task-input.dart';
+import '../components/task-list.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
