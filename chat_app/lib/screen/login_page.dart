@@ -10,30 +10,58 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Guf-Gaf"),
-              const SizedBox(height: 20),
-              const Column(
-                children: [
-                  ValidationInput(),
-                  SizedBox(height: 15),
-                  ValidationInput(),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 400, // Adjust this value according to your design
                   ),
-                  child: const Text("Login"),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 50),
+                      const Text(
+                        "Guf-Gaf",
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 150), // Adjust spacing here
+                      const Column(
+                        children: [
+                          ValidationInput(
+                            icons: Icons.email,
+                            hint: "Email@email.com",
+                            keyboardLayout: TextInputType.emailAddress,
+                          ),
+                          SizedBox(height: 15),
+                          ValidationInput(
+                            icons: Icons.password,
+                            hint: "Password",
+                            keyboardLayout: TextInputType.text,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                        ),
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
