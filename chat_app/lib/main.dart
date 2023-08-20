@@ -1,4 +1,5 @@
 import 'package:chat_app/screen/login_page.dart';
+import 'package:chat_app/screen/signup_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      initialRoute: "/login",
+      routes: {
+        "/login":(context)=>const LoginPage(),
+        "/signup":(context)=>const SignUpPage(),
+      },
     );
   }
 }

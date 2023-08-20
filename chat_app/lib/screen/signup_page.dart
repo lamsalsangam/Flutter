@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/validation_input.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,14 @@ class LoginPage extends StatelessWidget {
                             hint: "Password",
                             keyboardLayout: TextInputType.text,
                           ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          ValidationInput(
+                            icons: Icons.password,
+                            hint: "Re-enter Password",
+                            keyboardLayout: TextInputType.text,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -52,7 +60,7 @@ class LoginPage extends StatelessWidget {
                           minimumSize: const Size(double.infinity, 50),
                         ),
                         child: const Text(
-                          "Login",
+                          "Sign Up",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -60,12 +68,13 @@ class LoginPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account?"),
+                          const Text("Already have an account?"),
                           TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed("/signup");
-                              },
-                              child: const Text("Create One"))
+                            onPressed: () {
+                              Navigator.of(context).popAndPushNamed("/login");
+                            },
+                            child: const Text("Log in"),
+                          )
                         ],
                       )
                     ],
