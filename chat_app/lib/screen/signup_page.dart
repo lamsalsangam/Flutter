@@ -4,6 +4,8 @@ import '../components/validation_input.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
+  static const String routeName = "/signup";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

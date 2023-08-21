@@ -4,6 +4,8 @@ import '../components/validation_input.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
+  static const String routeName = "/login";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +65,7 @@ class LoginPage extends StatelessWidget {
                           const Text("Don't have an account?"),
                           TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed("/signup");
+                                Navigator.of(context).popAndPushNamed("/signup");
                               },
                               child: const Text("Create One"))
                         ],
