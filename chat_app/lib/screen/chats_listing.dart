@@ -1,3 +1,4 @@
+import 'package:chat_app/components/chat_tile_section.dart';
 import 'package:flutter/material.dart';
 
 import '../components/chat_app_bar.dart';
@@ -13,13 +14,11 @@ class ChatsListing extends StatelessWidget {
     return Scaffold(
       appBar: buildChatAppBar(context),
       drawer: buildChatDrawer(),
-      body: const Padding(
-        padding: EdgeInsets.only(top: 10,left: 8.0,right: 8.0, bottom: 15),
-        child: Column(
-          children: [
-            UserBar()
-          ],
-        ),
+      body: const Column(
+        children: [
+          UserBar(),
+          ChatTileSection()
+        ],
       ),
     );
   }
