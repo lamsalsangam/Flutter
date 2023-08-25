@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'chat_tile.dart';
+
 class ChatTileSection extends StatelessWidget {
-  const ChatTileSection({super.key});
+  const ChatTileSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,13 @@ class ChatTileSection extends StatelessWidget {
           ),
           color: Colors.black,
         ),
+        child: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return const ChatTile();
+          },
+        ),
       ),
     );
   }
 }
-
-
