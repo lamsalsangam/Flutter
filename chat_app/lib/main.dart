@@ -1,3 +1,4 @@
+import 'package:chat_app/screen/chat.dart';
 import 'package:chat_app/screen/chats_listing.dart';
 import 'package:chat_app/screen/login_page.dart';
 import 'package:chat_app/screen/signup_page.dart';
@@ -18,11 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(
         useMaterial3: true,
       ),
-      initialRoute: "/chat-listing",
+      initialRoute: "/chat",
       routes: {
         "/login": (context) => const LoginPage(),
         "/signup": (context) => const SignUpPage(),
         "/chat-listing": (context) => const ChatsListing(),
+        "/chat": (context) => const Chat(),
       },
     );
   }
