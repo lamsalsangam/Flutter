@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Chat App",
+      title: "Guf Gaf",
       theme: ThemeData.dark(
         useMaterial3: true,
       ),

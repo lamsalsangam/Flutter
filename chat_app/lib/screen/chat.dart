@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/chat_header.dart';
+import '../components/message_card.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});
@@ -9,17 +10,38 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          const EdgeInsets.only(top: 10, left: 8.0, right: 8.0, bottom: 15),
-      height: double.infinity,
-      child: const SafeArea(
+    return Scaffold(
+      appBar: const ChatHeader(),
+      body: Container(
+        color: Colors.white12,
+        height: double.infinity,
         child: Column(
           children: [
-            ChatHeader(),
+            Expanded(
+              child: Container(
+                color: Colors.black54,
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  children: const [
+                    MessageCard(
+                      message: "Your Typed message is here ",
+                      isSender: true,
+                    ),
+                    MessageCard(
+                      message: "Received message goes here",
+                      isSender: false,
+                    ),
+                    // Add more message cards as needed
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+
