@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(
         useMaterial3: true,
       ),
-      initialRoute: "/chat",
+      initialRoute: "/chat-listing",
       routes: {
         "/login": (context) => const LoginPage(),
         "/signup": (context) => const SignUpPage(),
