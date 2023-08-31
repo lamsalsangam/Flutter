@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:expense_app/data.dart'; // Assuming you have the correct import path for your data
+
+import '../components/total_balance.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double totalExpenses = 0;
+    for (var expense in expenditure) {
+      totalExpenses += (expense["expenses"] as num).toDouble();
+    }
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Container(
-                  height: 250,
-                  width: double.infinity,
+        child: ListView(
+          children: [
+            TotalBalance(totalExpenses: totalExpenses),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: expenditure.length,
+              itemBuilder: (context, index) {
+                final expense = expenditure[
+                    index]; // Assuming each item is an expense object
+                return Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.red,
+                    color: Colors.deepPurple[200],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
                     children: [
-                      Text("Total Balance",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white70,
-                      ),),
-                      Text("30000.00 ",
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      ),)
-                      // Add other widgets related to total balance here
+                      const Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 100,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "\$${expense['expenses']}",
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "${expense['date']}",
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "${expense['product']}",
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ),
-              ),
-              // Expanded(
-              //   child: Container(
-              //     // Add other content that should take up the remaining space
-              //   ),
-              // ),
-            ],
-          ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
