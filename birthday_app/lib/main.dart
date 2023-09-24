@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
 
+import 'data/fake-data.dart';
+
+class Person {
+  final String name;
+  final String dateOfBirth;
+
+  Person({required this.name, required this.dateOfBirth});
+
+  DateTime getDateTimeOfBirth() {
+    return DateTime.parse(dateOfBirth);
+  }
+}
+
+int daysUntilNextBirthday(DateTime birthDate) {
+  final today = DateTime.now();
+  final nextBirthday = DateTime(today.year, birthDate.month, birthDate.day);
+  return nextBirthday.isBefore(today) ? nextBirthday.add(const Duration(days: 365)).difference(today).inDays : nextBirthday.difference(today).inDays;
+}
+
 void main() {
+  fakeData.sort((a, b) {
+    final aBirthday = DateTime.parse(a["dateOfBirth"]!);
+    final bBirthday = DateTime.parse(b["dateOfBirth"]!);
+    return daysUntilNextBirthday(aBirthday).compareTo(daysUntilNextBirthday(bBirthday));
+  });
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +39,19 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Center(
-            child: _buildProfileCard(),
+            child: ListView.builder(
+              itemCount: fakeData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _buildProfileCard(index);
+              },
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildProfileCard() {
+  Widget _buildProfileCard(int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -31,21 +61,21 @@ class MyApp extends StatelessWidget {
         ),
         height: 200,
         alignment: Alignment.center,
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundColor: Colors.transparent,
               radius: 40,
               child: Icon(
-                Icons.person_2_sharp,
+                Icons.person,
                 size: 50,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              "Proteus",
-              style: TextStyle(
+              fakeData[index]["name"]!,
+              style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
