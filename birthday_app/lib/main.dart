@@ -2,28 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'data/fake-data.dart';
 
-class Person {
-  final String name;
-  final String dateOfBirth;
-
-  Person({required this.name, required this.dateOfBirth});
-
-  DateTime getDateTimeOfBirth() {
-    return DateTime.parse(dateOfBirth);
-  }
-}
-
 int daysUntilNextBirthday(DateTime birthDate) {
   final today = DateTime.now();
   final nextBirthday = DateTime(today.year, birthDate.month, birthDate.day);
-  return nextBirthday.isBefore(today) ? nextBirthday.add(const Duration(days: 365)).difference(today).inDays : nextBirthday.difference(today).inDays;
+  return nextBirthday.isBefore(today)
+      ? nextBirthday.add(const Duration(days: 365)).difference(today).inDays
+      : nextBirthday.difference(today).inDays;
 }
 
 void main() {
   fakeData.sort((a, b) {
     final aBirthday = DateTime.parse(a["dateOfBirth"]!);
     final bBirthday = DateTime.parse(b["dateOfBirth"]!);
-    return daysUntilNextBirthday(aBirthday).compareTo(daysUntilNextBirthday(bBirthday));
+    return daysUntilNextBirthday(aBirthday)
+        .compareTo(daysUntilNextBirthday(bBirthday));
   });
 
   runApp(const MyApp());
@@ -39,11 +31,14 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Center(
-            child: ListView.builder(
-              itemCount: fakeData.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _buildProfileCard(index);
-              },
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal, // Set horizontal scroll
+              child: Row(
+                children: [
+                  for (int index = 0; index < fakeData.length; index++)
+                    _buildProfileCard(index),
+                ],
+              ),
             ),
           ),
         ),
@@ -59,7 +54,7 @@ class MyApp extends StatelessWidget {
           color: Colors.deepPurple,
           borderRadius: BorderRadius.circular(10),
         ),
-        height: 200,
+        width: 200, // Set a fixed width for each card
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
