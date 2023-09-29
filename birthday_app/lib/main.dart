@@ -155,11 +155,14 @@ class MyApp extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final person = remainingBirthdays[index];
                     final name = person['name']?.toString();
+                    final date = person['dateOfBirth']?.toString();
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                          leading: const Icon(Icons.person),
-                          title: Text(name ?? '')),
+                        leading: const Icon(Icons.person),
+                        title: Text(name ?? ''),
+                        trailing: Text(date ?? ''),
+                      ),
                     );
                   },
                 ),
@@ -171,6 +174,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildRemainingBirthdayCard(Map<String, dynamic> person) {
     final name = person['name']?.toString();
+    final date = person['dateOfBirth']?.toString();
 
     return Container(
       decoration: BoxDecoration(
