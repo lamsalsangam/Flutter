@@ -96,6 +96,8 @@ class MyApp extends StatelessWidget {
 
   Widget _buildProfileCard<T>(T person) {
     final name = (person as Map<String, dynamic>)['name']?.toString();
+    final birthday = DateTime.parse((person)['dateOfBirth']);
+    final formattedBirthday = '${birthday.month}/${birthday.day}';
 
     return Container(
       decoration: BoxDecoration(
@@ -122,6 +124,14 @@ class MyApp extends StatelessWidget {
             style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Birthday: $formattedBirthday',
+            style: const TextStyle(
+              fontSize: 16,
               color: Colors.white,
             ),
           ),
@@ -169,44 +179,6 @@ class MyApp extends StatelessWidget {
               ),
             ],
           )),
-    );
-  }
-
-  Widget _buildRemainingBirthdayCard(Map<String, dynamic> person) {
-    final name = person['name']?.toString();
-    final date = person['dateOfBirth']?.toString();
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.lightBlue, // Customize the background color
-        borderRadius: BorderRadius.circular(10),
-      ),
-      width: 380,
-      height: 150,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 40,
-            child: Icon(
-              Icons.person,
-              size: 50,
-              color: Colors.white, // Customize the icon color
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            name ?? 'Unknown',
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
