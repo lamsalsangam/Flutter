@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-List<int> days = [...List.generate(24, (index) => index + 1)];
+import 'components/day_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,37 +12,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "React Native <-> Flutter",
+    return const MaterialApp(
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: days.map((day) => Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9EDE3),
-                border: Border.all(
-                  color: const Color(0xFF9B4521),
-                  width: 0.05
-                ),
-                  borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Text(
-                  '$day',
-                  style: const TextStyle(
-                    color: Color(0xFF9B4521),
-                    fontSize: 50,
-                  ),
-                ),
-              ),
-            )).toList(),
-          ),
+        body: App(),
+      ),
+    );
+  }
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: FutureBuilder(
+          // Simulate font loading with Future.delayed
+          future: Future.delayed(const Duration(seconds: 3)),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return DayList();
+          },
         ),
       ),
     );
   }
 }
+
+
+
+
