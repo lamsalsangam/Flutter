@@ -20,8 +20,9 @@ class DayListItem extends StatelessWidget {
       child: Center(
         child: Text(
           day.toString(),
-          style: GoogleFonts.inter(
-            fontSize: 50,
+          style: GoogleFonts.amaticSc(
+            fontSize: 75,
+            fontWeight: FontWeight.w700,
             color: const Color(0xFF9B4521),
           ),
         ),
