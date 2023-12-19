@@ -1,6 +1,8 @@
-import 'package:day_1/screens/day_details.dart';
 import 'package:day_1/screens/day_list.dart';
+import 'package:day_1/screens/not_found.dart';
 import 'package:flutter/material.dart';
+
+import 'lib/switching_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,10 +22,17 @@ class MyApp extends StatelessWidget {
       routes: {
         "/listing": (context) => DayList(),
         "/day/:id": (context) {
-          final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+          final Map arguments =
+              ModalRoute.of(context)!.settings.arguments as Map;
+
+          if (!arguments.containsKey('id') ||
+              (arguments['id'] as int?) == null) {
+            return const NotFoundPage();
+          }
+
           final int id = arguments['id'] as int;
-          return DayDetails(day: id);
-        },
+          return getDayRoute(id);
+        }
       },
     );
   }

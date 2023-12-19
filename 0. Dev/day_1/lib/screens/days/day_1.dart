@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DayDetails extends StatelessWidget {
+class Day1Screen extends StatelessWidget {
   final int day;
 
-  const DayDetails({super.key, required this.day});
+  const Day1Screen({super.key, required this.day});
 
   @override
   Widget build(BuildContext context) {
