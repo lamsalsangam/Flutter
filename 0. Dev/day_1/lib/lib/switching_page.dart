@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/days/day_1.dart';
+import '../screens/days/day1/day_1.dart';
 import '../screens/no_page.dart';
 
 
