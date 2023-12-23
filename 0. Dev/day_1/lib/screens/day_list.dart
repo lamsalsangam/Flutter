@@ -11,6 +11,7 @@ class DayList extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.white,
+        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

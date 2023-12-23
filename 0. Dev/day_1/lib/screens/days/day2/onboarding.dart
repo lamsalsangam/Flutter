@@ -1,5 +1,37 @@
 import 'package:flutter/material.dart';
 
+class OnboardingStep {
+  late IconData icon;
+  late String title;
+  late String description;
+
+  OnboardingStep({
+    required this.icon,
+    required this.title,
+    required this.description,
+  });
+}
+
+final onboardingSteps = [
+  OnboardingStep(
+    icon: Icons.snowing,
+    title: "Learn ReactNative",
+    description: "Learning the react native for gaining knowledge.",
+  ),
+  OnboardingStep(
+    icon: Icons.currency_exchange,
+    title: "Grow more",
+    description:
+        "Learning never ends; the more you know, the more there is to know.",
+  ),
+  OnboardingStep(
+    icon: Icons.arrow_upward_rounded,
+    title: "Endless Possibilities",
+    description:
+        "Jack of all trades, master of none, but still is better than a master of one.",
+  ),
+];
+
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
@@ -8,99 +40,135 @@ class OnboardingScreen extends StatelessWidget {
     return const Scaffold(
       backgroundColor: Color(0xFF15141A),
       body: SafeArea(
-        child: OnBoardScreen1(),
+        child: OnBoardScreen(),
       ),
     );
   }
 }
 
-class OnBoardScreen1 extends StatelessWidget {
-  const OnBoardScreen1({
-    super.key,
-  });
+class OnBoardScreen extends StatefulWidget {
+  const OnBoardScreen({super.key});
+
+  @override
+  State<OnBoardScreen> createState() => _OnBoardScreenState();
+}
+
+class _OnBoardScreenState extends State<OnBoardScreen> {
+  int screenIndex = 0;
+
+  void endOnboarding() {
+    Navigator.pop(context); // Assuming you want to navigate back on completion
+  }
+
+  void onContinue() {
+    if (screenIndex == onboardingSteps.length - 1) {
+      endOnboarding();
+    } else {
+      setState(() {
+        screenIndex++;
+      });
+    }
+  }
+
+  void onBack() {
+    if (screenIndex == 0) {
+      endOnboarding();
+    } else {
+      setState(() {
+        screenIndex--;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Center(
-            child: Icon(
-              Icons.currency_exchange,
-              size: 100,
-              color: Color(0xFFCEF202),
-            ),
-          ),
-          const SizedBox(height: 30),
-          // Add vertical space between icon and text
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Track Every Transaction",
-                style: TextStyle(
-                  color: Color(0xFFFDFDFD),
-                  fontWeight: FontWeight.w900,
-                  fontSize: 50,
-                  letterSpacing: 1.3,
-                ),
-              ),
-              const SizedBox(height: 15),
-              // Add space between title and description
-              const Text(
-                "Monitor your spending and contribution, ensuring every penny aligns with your family's aspirations.",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                ),
-              ),
+    final data = onboardingSteps[screenIndex];
 
-              const SizedBox(height: 40),
-              // Add vertical space before buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Skip",
-                      style: TextStyle(
-                        color: Color(0xFFFDFDFD),
-                        fontSize: 16,
-                      ),
-                    ),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity! > 0) {
+          onBack();
+        } else if (details.primaryVelocity! < 0) {
+          onContinue();
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Center(
+              child: Icon(
+                data.icon,
+                size: 100,
+                color: const Color(0xFFCEF202),
+              ),
+            ),
+            const SizedBox(height: 30),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data.title,
+                  style: const TextStyle(
+                    color: Color(0xFFFDFDFD),
+                    fontWeight: FontWeight.w900,
+                    fontSize: 50,
+                    letterSpacing: 1.3,
                   ),
-                  const SizedBox(width: 20),
-                  // Add horizontal space between buttons
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF302E28),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 75.0,
-                        vertical: 15.0,
-                      ),
-                      child: Text(
-                        "Continue",
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  data.description,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: onBack,
+                      child: const Text(
+                        "Skip",
                         style: TextStyle(
                           color: Color(0xFFFDFDFD),
                           fontSize: 16,
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: onContinue,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF302E28),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 75.0,
+                          vertical: 15.0,
+                        ),
+                        child: Text(
+                          "Continue",
+                          style: TextStyle(
+                            color: Color(0xFFFDFDFD),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
