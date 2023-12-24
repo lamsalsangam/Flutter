@@ -76,4 +76,3 @@ class _Day2ScreenState extends State<Day2Screen> {
 }
 
 // Example of another screen
-
