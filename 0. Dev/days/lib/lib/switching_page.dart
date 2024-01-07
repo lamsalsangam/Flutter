@@ -1,3 +1,4 @@
+import 'package:days/screens/days/day4/day_4.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/days/day1/day_1.dart';
@@ -17,6 +18,8 @@ Widget getDayRoute(int id) {
       return const Day2Screen(day: 2);
     case 3:
       return const Day3Screen(day:3);
+    case 4:
+      return const Day4Screen(day: 4);
     default:
       return const NoPageFoundPage();
   }

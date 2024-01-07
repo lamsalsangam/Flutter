@@ -1,4 +1,4 @@
-import 'package:day_1/screens/days/day3/editor_preview.dart';
+import 'package:days/screens/days/day3/editor_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -24,7 +24,7 @@ class Day3Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Day 3 MarkDown"),
+        title: Text("Day $day MarkDown"),
       ),
       body: SafeArea(
         child: Column(

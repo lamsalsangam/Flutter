@@ -1,5 +1,5 @@
-import 'package:day_1/screens/day_list.dart';
-import 'package:day_1/screens/not_found.dart';
+import 'package:days/screens/day_list.dart';
+import 'package:days/screens/not_found.dart';
 import 'package:flutter/material.dart';
 
 import 'lib/switching_page.dart';
