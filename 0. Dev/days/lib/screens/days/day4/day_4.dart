@@ -1,3 +1,4 @@
+import 'package:days/screens/days/day4/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -19,7 +20,6 @@ class Day4Screen extends StatelessWidget {
         title: Text("Day $day Animation"),
       ),
       body: Column(
-
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const MarkdownBody(data: markDownContent),
@@ -28,7 +28,13 @@ class Day4Screen extends StatelessWidget {
           ),
           Center(
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AnimationDay4Screen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
